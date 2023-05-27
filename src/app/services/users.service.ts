@@ -13,9 +13,20 @@ export class UsersService {
 
   getUsers() {
     return this.http.get<IResponse<IUser>>(`${this.url}/users`).pipe(
+      // 'map' of rxjs returns an Observable
       map((resp) => {
-        const data = resp.data;
+        const data = resp.data as Array<IUser>;
         return data.map((userData) => new User(userData));
+      })
+    );
+  }
+
+  getUserById(id: string) {
+    return this.http.get<IResponse<IUser>>(`${this.url}/users/${id}`).pipe(
+      // 'map' of rxjs returns an Observable
+      map((resp) => {
+        const data = resp.data as IUser;
+        return new User(data);
       })
     );
   }

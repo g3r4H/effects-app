@@ -3,5 +3,9 @@ export interface IResponse<T> {
   per_page: number;
   total: number;
   total_pages: number;
-  data: T[];
+  data: T | T[];
+  support: {
+    url: string;
+    text: string;
+  };
 }
